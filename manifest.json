@@ -1,0 +1,55 @@
+{
+  "name": "脉脉Spider（旭尧的Mapping小工具）",
+  "version": "2018.06.05",
+  "manifest_version": 2,
+  "description": "在脉脉PC端登录账号，打开详情页会自动进行数据抓取；并将结果导出为Excel",
+  "icons": {
+    "16": "icon.png",
+    "48": "icon.png",
+    "128": "icon.png"
+  },
+  "browser_action": {
+    "default_icon": "icon.png",
+    "default_title": "脉脉Spider（旭尧的Mapping小工具）"
+  },
+  "background": {
+    "persistent": true,
+    "scripts": [
+      "background.js"
+    ]
+  },
+  "options_page": "options.html",
+  "options_ui": {
+    "chrome_style": true,
+    "page": "options.html",
+    "open_in_tab": false
+  },
+  "permissions": [
+    "tabs",
+    "<all_urls>"
+  ],
+  "optional_permissions": [
+    "downloads"
+  ],
+  "commands": {
+    "_execute_browser_action": {
+      "suggested_key": {
+        "default": "Alt+K"
+      }
+    }
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://maimai.cn/contact/detail/*"
+      ],
+      "js": [
+        "jquery-3.3.1.min.js",
+        "content-script.js"
+      ],
+      "run_at": "document_end",
+      "all_frames": false
+    }
+  ],
+  "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self' ;"
+}
